@@ -1,3 +1,4 @@
+#this is machine learning model used in the website
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
