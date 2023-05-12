@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Road Accident Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Another Google</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.2/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <div class="col-12 text-center pt-5">
+        <br>
+    <h1>Road Accident Prediction</h1>
+    <br></div>
+    <form id="prediction-form">
+        <label for="people"><h5>Number of People:</h5></label><br>
+        <input type="number" id="people" name="people"class="form-control"><br>
+
+        <label for="day_week"><h5>Day of Week:</h5></label><br>
+        <select id="day_week" name="day_week"class="form-control">
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
+            <option value="7">Sunday</option>
+        </select><br>
+
+        <label for="hour"><h5>Hour:</h5></label><br>
+        <input type="number" id="hour" name="hour"class="form-control"><br>
+
+        <label for="drunk_drive"><h5>Drunk Driving:</h5></label><br>
+        <select id="drunk_drive" name="drunk_drive"class="form-control">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br>
+
+        <label for="month"><h5>Month:</h5></label><br>
+        <input type="number" id="month" name="month" class="form-control"><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        $("#prediction-form").submit(function (event) {
+            event.preventDefault();
+            var people = $("#people").val();
+            var day_week = $("#day_week").val();
+            var hour = $("#hour").val();
+            var drunk_drive = $("#drunk_drive").val();
+            var month = $("#month").val();
+            var data = {
+                "people": people,
+                "day_week": day_week,
+                "hour": hour,
+                "drunk_drive": drunk_drive,
+                "month": month
+            };
+            $.ajax({
+                type: "POST",
+                url: "/number/",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    $("#result").html("The number of fatalities is " + result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
