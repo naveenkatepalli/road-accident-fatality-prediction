@@ -24,11 +24,11 @@ def predict(people, day_week, hour, drunk_drive,month):
     return int(a)
 
 
-df = pd.read_csv(r"C:\Users\Naveen\OneDrive\Desktop\road accident\road accident data.csv")
+df = pd.read_csv(r"road-accident-data.csv")
 model=algo(df)
 @app.route("/",methods=["GET"])
 def indexPage():
-	return open(r"C:\Users\Naveen\OneDrive\Desktop\road accident\index.html").read()
+	return open(r"index.html").read()
 
 @app.route("/number/",methods=["POST"])
 def wordSearch():
